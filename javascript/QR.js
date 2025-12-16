@@ -17,9 +17,28 @@
     [1, 0, 1, 1, 1, 0, 1, 0], [1, 0, 0, 0, 0, 0, 1, 0], [1, 1, 1, 1, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0]
   ];
   var _eye = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 1, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]];
-  var QR = function(n) {
-    // s = new TextEncoder().encode(s);
-    var v = n;
+  var _len = [
+    0, 19, 34, 55, 80, 108, 136, 156, 194, 232, 274, 324, 370, 428, 461, 523, 589, 647, 721, 795, 861,
+    932, 1006, 1094, 1174, 1276, 1370, 1468, 1531, 1631, 1735, 1843, 1955, 2071, 2191, 2306, 2434, 2566, 2702, 2812, 2956
+  ];
+  var QR = function(s) {
+    s = new TextEncoder().encode(s);
+    var i, v;
+    for (v = 1; v <= 40; v++) if (s.length + (v < 10 ? 2 : 3) <= _len[v]) break;
+    if (v > 40) throw "Input string is too long!";
+    var b = [0x40];
+    if (v >= 10) {
+      b[0] += s.length >> 12;
+      b.push((s.length >> 4) & 255);
+    }
+    else b[0] += s.length >> 4;
+    b.push((s.length & 15) << 4);
+    for (i = 0; i < s.length; i++) {
+      b[b.length - 1] += (s[i] >> 4);
+      b.push((s[i] & 15) << 4);
+    }
+    for (i = 0; b.length < _len[v]; i++) b.push((i & 1) ? 17 : 236);
+console.log(b.map(n => n.toString(16)).join(' '));
     var dots = _dots(v);
     _static(dots, v);
     return dots;

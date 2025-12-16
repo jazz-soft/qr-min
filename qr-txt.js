@@ -1,5 +1,9 @@
 const QR = require('.');
 const txt = process.argv[2];
+if (txt == undefined) {
+    console.log('Usage: ' + process.argv[1].split(/\/|\\/).slice(-1)[0] + ' <text-to-encode>');
+    process.exit(0);
+}
 const qr = QR(txt);
 var i, j, s = '';
 for (i = 0; i < qr.length; i += 2) {
