@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>QR test</title>
+<script src="javascript/QR.js"></script>
+</head>
+
+<body>
+<h1>QR test</h1>
+
+<input id="txt">
+
+<pre id="pre">
+</pre>
+
+<script>
+var txt = document.getElementById('txt');
+var pre = document.getElementById('pre');
+txt.addEventListener("input", function(evt) { redraw(evt.target.value); });
+redraw('https://github.com/jazz-soft/QR');
+
+function redraw(str) {
+  var qr = QR(str);
+  pre.innerHTML = make_txt(qr);
+}
+function make_txt(qr) {
+  var i, j, s = '';
+  for (i = 0; i < qr.length; i += 2) {
+    for (j = 0; j < qr.length; j++) s += i + 1 < qr.length && qr[i + 1][j] ? qr[i][j] ? '█' : '▄' : qr[i][j] ? '▀' : ' ';
+    s += '\n';
+  }
+  return s;
+}
+</script>
+
+</body>
+</html>
