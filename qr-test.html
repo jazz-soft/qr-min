@@ -4,7 +4,10 @@
 <title>QR test</title>
 <script src="javascript/QR.js"></script>
 <style>
-#svg { display:inline-block;width: 200px;}
+.fig, #svg {display:inline-block;}
+.fig {background-color:#eee;vertical-align:top;margin:.3em; }
+pre {padding: .5em;}
+input {width:80%;}
 </style>
 </head>
 
@@ -12,22 +15,37 @@
 <h1>QR test</h1>
 
 <div><input id="txt"></div>
-<h4>SVG:</h4>
+
+<span class="fig">
+<div>SVG:</div>
 <div><span id="svg">svg</span></div>
-<h4>Text:</h4>
+</span>
+
+<span class="fig">
+<div>Canvas:</div>
+<div><span id="can">canvas</span></div>
+</span>
+
+<span class="fig">
+<div>Text:</div>
 <div><pre id="pre"></pre></div>
+</span>
 
 <script>
+var sz = 8;
 var txt = document.getElementById('txt');
 var svg = document.getElementById('svg');
+var can = document.getElementById('can');
 var pre = document.getElementById('pre');
 txt.addEventListener("input", function(evt) { redraw(evt.target.value); });
+txt.focus();
 redraw('https://github.com/jazz-soft/QR');
 
 function redraw(str) {
   var qr = QR(str);
   make_txt(qr);
   make_svg(qr);
+  make_can(qr);
 }
 function make_txt(qr) {
   var i, j, s = '';
@@ -51,7 +69,19 @@ function make_svg(qr) {
     x.appendChild(w);
   }
   svg.innerHTML = '';
+  svg.style.width = sz * (4 + qr.length) + 'px';
   svg.appendChild(x);
+}
+function make_can(qr) {
+  var x = document.createElement('canvas');
+  x.width = sz * (4 + qr.length);
+  x.height = sz * (4 + qr.length);
+  var w = x.getContext('2d');
+  for (i = 0; i < qr.length; i++) for (j = 0; j < qr.length; j++) if (qr[i][j]) {
+    w.fillRect(sz * (j + 2), sz * (i + 2), sz, sz);
+  }
+  can.innerHTML = '';
+  can.appendChild(x);
 }
 </script>
 
