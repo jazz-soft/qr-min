@@ -58,9 +58,36 @@
     var d = _dots(v);
     var r = _res(v);
     _static(d, v);
-    // _mask(d, r, 7);
+    var p = [d.length - 1, d.length - 1];
+    for (i = 0; i < b.length; i++) {
+      for (j = 7; j >= 0; j--) {
+        d[p[0]][p[1]] = (b[i] & (1 << j)) >> j;
+        for (_nxt(p, d.length); r[p[0]][p[1]]; _nxt(p, d.length)) ;
+      }
+    }
+    _format(d, 0, 0);
+    _mask(d, r, 0);
     return d;
   };
+  function _nxt(p, sz) {
+    var d = (p[1] > 5 ? p[1] - 1 : p[1]) % 4;
+    sz--;
+    if (!d) {
+      if (p[0] < sz) {
+        p[0]++; p[1]++;
+      }
+      else if (!p[1]) p[1] = sz;
+      else p[1]--;
+    }
+    else if (d == 2) {
+      if (p[0]) {
+        p[0]--; p[1]++;
+      }
+      else if (p[1] == 7) p[1] -= 2;
+      else p[1]--;
+    }
+    else p[1]--;
+  }
   function _raw(v) {
     var n, x = (16 * v + 128) * v + 64;
     if (v > 1) {
@@ -107,6 +134,7 @@
         d[e[k] + i - 2][e[m] + j - 2] = _eye[i][j];
       }
     }
+    d[sz - 8][8] = 1;
   }
   function _res(v) {
     var i, j, k, m, sz = v * 4 + 17, e = _eyes(v);
@@ -133,6 +161,19 @@
       }
     }
     return r;
+  }
+  function _format(d, c, m) {
+    var i, r, x = [1, 0, 3, 2][c] << 3 | m;
+    r = x;
+    for (i = 0; i < 10; i++) r = (r << 1) ^ ((r >>> 9) * 0x537);
+    x = (x << 10 | r) ^ 0x5412;
+    for (i = 0; i < 6; i++) d[i][8] = (x & (1 << i)) >> i;
+    d[7][8] = (x & (1 << 6)) >> 6;
+    d[8][8] = (x & (1 << 7)) >> 7;
+    d[8][7] = (x & (1 << 8)) >> 8;
+    for (i = 9; i < 15; i++) d[8][14 - i] = (x & (1 << i)) >> i;
+    for (i = 0; i < 8; i++) d[8][d.length - 1 - i] = (x & (1 << i)) >> i;
+    for (i = 8; i < 15; i++) d[d.length - 15 + i][8] = (x & (1 << i)) >> i;
   }
   function _mask(d, r, m) {
     var i, j, k;
