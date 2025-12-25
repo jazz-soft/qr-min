@@ -1,8 +1,8 @@
 {
-  "name": "qr-gen",
-  "version": "0.0.0",
+  "name": "qr-min",
+  "version": "0.0.1",
   "description": "coming soon...",
-  "main": "javascript/qr-gen.js",
+  "main": "javascript/qr-min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,11 +13,11 @@
   "author": "jazz-soft (https://jazz-soft.net/)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jazz-soft/qr-gen.git"
+    "url": "git+https://github.com/jazz-soft/qr-min.git"
   },
-  "homepage": "https://github.com/jazz-soft/qr-gen",
+  "homepage": "https://github.com/jazz-soft/qr-min",
   "bugs": {
-    "url": "https://github.com/jazz-soft/qr-gen/issues"
+    "url": "https://github.com/jazz-soft/qr-min/issues"
   },
   "license": "MIT"
 }

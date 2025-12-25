@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>QR-gen</title>
-<script src="javascript/qr-gen.js"></script>
+<script src="javascript/qr-min.js"></script>
 <style>
 .fig, #svg {display:inline-block;}
 .fig {background-color:#eee;vertical-align:top;margin:.3em; }
@@ -40,7 +40,7 @@ var can = document.getElementById('can');
 var pre = document.getElementById('pre');
 txt.addEventListener("input", function(evt) { redraw(evt.target.value); });
 txt.focus();
-redraw('https://github.com/jazz-soft/qr-gen');
+redraw('https://github.com/jazz-soft/qr-min');
 
 function redraw(str) {
   var qr = QR(str);
