@@ -1,0 +1,8 @@
+.*
+minified
+coverage
+Gruntfile.js
+eslint.config.mjs
+*.html
+qr-svg.js
+qr-txt.js

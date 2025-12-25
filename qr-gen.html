@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>QR test</title>
-<script src="javascript/QR.js"></script>
+<title>QR-gen</title>
+<script src="javascript/qr-gen.js"></script>
 <style>
 .fig, #svg {display:inline-block;}
 .fig {background-color:#eee;vertical-align:top;margin:.3em; }
@@ -12,8 +12,9 @@ input {width:80%;}
 </head>
 
 <body>
-<h1>QR test</h1>
+<h1>QR-gen</h1>
 
+<div>Enter text:</div>
 <div><input id="txt"></div>
 
 <span class="fig">
@@ -39,7 +40,7 @@ var can = document.getElementById('can');
 var pre = document.getElementById('pre');
 txt.addEventListener("input", function(evt) { redraw(evt.target.value); });
 txt.focus();
-redraw('https://github.com/jazz-soft/QR');
+redraw('https://github.com/jazz-soft/qr-gen');
 
 function redraw(str) {
   var qr = QR(str);
