@@ -143,6 +143,17 @@
       }
     }
     d[sz - 8][8] = 1;
+    if (v > 6) {
+      m = v;
+      for (k = 0; k < 12; k++) m = (m << 1) ^ ((m >>> 11) * 0x1F25);
+      m = v << 12 | m;
+      for (k = 0; k < 18; k++) {
+        i = sz - 11 + k % 3;
+        j = Math.floor(k / 3);
+        d[i][j] = (m & (1 << k)) >>> k;
+        d[j][i] = (m & (1 << k)) >>> k;
+      }
+    }
   }
   function _res(v) {
     var i, j, k, m, sz = v * 4 + 17, e = _eyes(v);
@@ -167,6 +178,10 @@
         if (!m && k == e.length - 1) continue;
         r[e[k] + i - 2][e[m] + j - 2] = 1;
       }
+    }
+    if (v > 6) for (i = 0; i < 6; i++) for (j = 0; j < 3; j++) {
+      r[i][sz - j - 9] = 1;
+      r[sz - j - 9][i] = 1;
     }
     return r;
   }

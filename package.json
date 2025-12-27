@@ -1,6 +1,6 @@
 {
   "name": "qr-min",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Minimal implementation to generate a QR code from a UTF-8 string",
   "main": "javascript/qr-min.js",
   "scripts": {
