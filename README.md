@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/qr-min.svg)](https://www.npmjs.com/package/qr-min)
 [![npm](https://img.shields.io/npm/dt/qr-min.svg)](https://www.npmjs.com/package/qr-min)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/qr-min/badge)](https://www.jsdelivr.com/package/npm/qr-min)
 [![build](https://github.com/jazz-soft/qr-min/actions/workflows/build.yml/badge.svg)](https://github.com/jazz-soft/qr-min/actions)
 [![Coverage Status](https://coveralls.io/repos/github/jazz-soft/qr-min/badge.svg?branch=main)](https://coveralls.io/github/jazz-soft/qr-min?branch=main)
 
